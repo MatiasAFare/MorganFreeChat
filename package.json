@@ -1,0 +1,19 @@
+{
+  "name": "tp_final",
+  "version": "1.0.0",
+  "description": "Chat multiusuario con Node.js, TCP y logs",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "client": "node client/client.js"
+  },
+  "keywords": [
+    "chat",
+    "tcp",
+    "multiusuario",
+    "nodejs"
+  ],
+  "author": "Fagove",
+  "license": "ISC",
+  "type": "commonjs"
+}
