@@ -1,0 +1,18 @@
+# Node.js
+node_modules/
+.env
+.DS_Store
+logs/
+*.log
+npm-debug.log*
+
+# VSCode
+.vscode/
+
+# Sistema
+Thumbs.db
+*.swp
+
+# Otros
+*.bak
+*.tmp

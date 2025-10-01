@@ -1,10 +1,20 @@
 
+
 <div align="center">
-  <img src="server/images/MorganOh.png" alt="MorganFreeChat" width="120"/>
+	<img src="server/images/MorganOh.png" alt="MorganFreeChat" width="120"/>
   
-  # 🗨️ MorganFreeChat
+	# 🗨️ MorganFreeChat
   
-  <b>Chat multiusuario por consola usando Node.js y TCP</b>
+	<b>Chat multiusuario por consola usando Node.js y TCP</b>
+
+	<br/>
+  
+	<a href="https://nodejs.org/">
+		<img src="https://img.shields.io/badge/node-%3E%3D14.0.0-green?logo=node.js" alt="Node.js version"/>
+	</a>
+	<a href="./LICENSE">
+		<img src="https://img.shields.io/badge/license-ISC-blue.svg" alt="License: ISC"/>
+	</a>
 </div>
 
 ---
