@@ -182,6 +182,27 @@ class ChatApp {
     }
 
     addMessage(username, content, type = 'chat', timestamp = null) {
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'message-container';
+
+        // Decide image and alignment
+        let imgSrc, imgClass;
+        if (type === 'system' || type === 'user-event') {
+            imgSrc = './images/MorganchatUser.jpg'; 
+            imgClass = 'avatar left';
+        } else if (username === this.currentUser) {
+            imgSrc = "./images/MorganchatUserIcon.png"
+            imgClass = 'avatar right';
+        } else {
+            imgSrc = "./images/MorganchatUserCat.jpg"
+            imgClass = 'avatar left';
+        }
+
+        const avatarImg = document.createElement('img');
+        avatarImg.src = imgSrc;
+        avatarImg.className = imgClass;
+        avatarImg.alt = 'avatar';
+
         const messageElement = document.createElement('div');
         messageElement.className = `message ${type}`;
 
@@ -190,13 +211,22 @@ class ChatApp {
 
         messageElement.innerHTML = `
             <div class="message-header">
-                <span class="message-username">${this.escapeHtml(username)}</span>
-                <span class="message-timestamp">${timeStr}</span>
+            <span class="message-username">${this.escapeHtml(username)}</span>
+            <span class="message-timestamp">${timeStr}</span>
             </div>
             <div class="message-content">${this.escapeHtml(content)}</div>
         `;
 
-        this.messagesContainer.appendChild(messageElement);
+        // Agrega el avatar según el lado
+        if (imgClass.includes('right')) {
+            messageContainer.appendChild(messageElement);
+            messageContainer.appendChild(avatarImg);
+        } else {
+            messageContainer.appendChild(avatarImg);
+            messageContainer.appendChild(messageElement);
+        }
+
+        this.messagesContainer.appendChild(messageContainer);
         this.scrollToBottom();
     }
 

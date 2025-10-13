@@ -6,3 +6,52 @@
 [2025-10-13 10:21:20] [nicktest] (localhost) -> "probar comando salir"
 [2025-10-13 10:21:22] [nicktest] (localhost) -> COMANDO: /salir
 [2025-10-13 10:21:22] [SISTEMA] (localhost) -> nicktest se desconectó del chat
+[2025-10-13 16:19:39] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 16:20:16] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 16:20:22] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 16:21:38] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 16:22:31] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 16:37:26] [test] (localhost) -> "hola"
+[2025-10-13 16:53:33] [test] (localhost) -> COMANDO: /salir
+[2025-10-13 16:53:33] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 16:57:02] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:00:28] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:00:33] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:02:53] [test] (localhost) -> "hola"
+[2025-10-13 17:05:15] [test] (localhost) -> COMANDO: /command
+[2025-10-13 17:05:35] [test] (localhost) -> COMANDO: /nick
+[2025-10-13 17:05:50] [test] (localhost) -> COMANDO: /help
+[2025-10-13 17:05:58] [test] (localhost) -> COMANDO: /lista
+[2025-10-13 17:11:13] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:11:17] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:12:03] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:12:07] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:18:10] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:24:35] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:46:20] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:46:24] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:46:27] [test] (localhost) -> "hola"
+[2025-10-13 17:48:30] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:48:33] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:48:36] [test] (localhost) -> "hola"
+[2025-10-13 17:49:53] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:49:57] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:49:59] [test] (localhost) -> "hola"
+[2025-10-13 17:51:14] [test] (localhost) -> COMANDO: /help
+[2025-10-13 17:56:24] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:56:36] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:58:08] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 17:58:12] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 17:58:15] [test] (localhost) -> "hola"
+[2025-10-13 18:01:27] [test] (localhost) -> COMANDO: /system
+[2025-10-13 18:01:32] [test] (localhost) -> COMANDO: /help
+[2025-10-13 18:25:42] [SISTEMA] (localhost) -> test se desconectó del chat
+[2025-10-13 18:25:47] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-13 18:25:50] [test] (localhost) -> "hola"
+[2025-10-13 18:26:43] [test] (localhost) -> "hola!"
+[2025-10-13 18:26:49] [test] (localhost) -> COMANDO: /system
+[2025-10-13 18:26:52] [test] (localhost) -> COMANDO: /lista
+[2025-10-13 18:27:24] [SISTEMA] (localhost) -> test1 se conectó al chat
+[2025-10-13 18:27:40] [test1] (localhost) -> "test"
+[2025-10-13 18:28:13] [SISTEMA] (localhost) -> test1 se desconectó del chat
+[2025-10-13 18:57:49] [SISTEMA] (localhost) -> test fue desconectado (servidor cerrado)
