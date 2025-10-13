@@ -81,8 +81,11 @@ La aplicación sigue una arquitectura MVC con separación clara de responsabilid
 - Desconexión al cerrar ventana/pestaña
 
 ### Logging
-- Registro completo de actividad del chat
-- Logs almacenados en `src/logs/chat-messages.log`
+- Registro completo de actividad del chat en `src/logs/chat-messages.log`
+  - Mensajes de usuarios
+  - Comandos ejecutados
+  - Eventos de conexión/desconexión
+- Logs del sistema en consola (Winston)
 
 ## API
 
