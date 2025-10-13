@@ -82,6 +82,14 @@ class ChatApp {
       this.addMessage("Sistema", data.message, "user-event");
     });
 
+    wsClient.on("kicked", (data) => {
+      this.logout();
+      this.showModal(
+        "Desconectado",
+        data.reason || "Se ha iniciado sesión desde otra ubicación."
+      );
+    });
+
     wsClient.ws?.addEventListener("close", () => {
       this.updateConnectionStatus("reconnecting");
     });

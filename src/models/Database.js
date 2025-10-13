@@ -182,6 +182,26 @@ class Database {
     });
   }
 
+  // Obtener sesión activa por ID de usuario
+  async getActiveSessionByUserId(userId) {
+    return new Promise((resolve, reject) => {
+      this.db.get(
+        `
+                SELECT * FROM user_sessions 
+                WHERE user_id = ? AND is_active = 1
+            `,
+        [userId],
+        (err, row) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(row);
+          }
+        }
+      );
+    });
+  }
+
   // Actualizar actividad de sesión
   async updateSessionActivity(sessionId) {
     return new Promise((resolve, reject) => {

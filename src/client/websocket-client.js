@@ -79,6 +79,12 @@ class WebSocketClient {
     console.log("WebSocket disconnected:", event.code, event.reason);
     this.isAuthenticated = false;
 
+    if (event.code === 4000) {
+      this.shouldReconnect = false;
+      this.emit("kicked", { reason: event.reason });
+      return;
+    }
+
     if (this.shouldReconnect && event.code !== 1000) {
       this.attemptReconnect();
     }
