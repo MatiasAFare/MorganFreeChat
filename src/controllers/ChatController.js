@@ -1,5 +1,4 @@
 const { encrypt } = require("../utils/crypto");
-const logger = require("../utils/logger");
 const chatLogger = require("../utils/chatLogger");
 
 class ChatController {

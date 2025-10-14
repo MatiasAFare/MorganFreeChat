@@ -4,23 +4,27 @@ const config = require("../config");
 
 // Configuración del cifrado
 const ALGORITHM = "aes-256-cbc";
-const SECRET_KEY = crypto.scryptSync(config.encryption.key, "salt", 32);
-const IV = crypto.randomBytes(16);
+// Derivar clave con SHA-256 para compatibilidad con Web Crypto en el navegador (PoC)
+const SECRET_KEY = crypto.createHash("sha256").update(String(config.encryption.key)).digest();
 
+/**
+ * Cifra un mensaje y devuelve { encrypted, iv }
+ */
 function encrypt(text) {
-  const cipher = crypto.createCipheriv(ALGORITHM, SECRET_KEY, IV);
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv(ALGORITHM, SECRET_KEY, iv);
   const encrypted = cipher.update(text, "utf8", "hex") + cipher.final("hex");
-
-  return { encrypted };
+  return { encrypted, iv: iv.toString("hex") };
 }
 
+/**
+ * Descifra un objeto { encrypted, iv }
+ */
 function decrypt(encryptedData) {
   try {
-    const decipher = crypto.createDecipheriv(ALGORITHM, SECRET_KEY, IV);
-    const decrypted =
-      decipher.update(encryptedData.encrypted, "hex", "utf8") +
-      decipher.final("utf8");
-
+    const iv = Buffer.from(encryptedData.iv, "hex");
+    const decipher = crypto.createDecipheriv(ALGORITHM, SECRET_KEY, iv);
+    const decrypted = decipher.update(encryptedData.encrypted, "hex", "utf8") + decipher.final("utf8");
     return decrypted;
   } catch (error) {
     console.error("Error al descifrar:", error);

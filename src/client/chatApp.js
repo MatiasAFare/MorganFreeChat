@@ -63,10 +63,28 @@ class ChatApp {
       this.handleAuthSuccess(data);
     });
 
-    wsClient.on("chat_message", (data) => {
-      const content = data.encrypted
-        ? clientCrypto.decrypt(data.content)
-        : data.content;
+    wsClient.on("chat_message", async (data) => {
+      let content;
+      if (data.encrypted) {
+        // 🔒 Mostrar mensaje cifrado en consola
+        console.log("%c📩 Mensaje recibido cifrado:", "color: #f59e0b; font-weight: bold");
+        console.log("   Usuario:", data.username);
+        console.log("   Encrypted:", data.content.encrypted);
+        console.log("   IV:", data.content.iv);
+        
+        try {
+          content = await clientCrypto.decrypt(data.content);
+          
+          // 🔓 Mostrar mensaje descifrado
+          console.log("%c   ✅ Descifrado:", "color: #10b981; font-weight: bold", content);
+          console.log("---");
+        } catch (err) {
+          console.error("Error decrypting message in client:", err);
+          content = "[Mensaje cifrado]";
+        }
+      } else {
+        content = data.content;
+      }
       this.addMessage(data.username, content, "chat", data.timestamp);
     });
 
