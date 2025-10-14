@@ -1,5 +1,6 @@
 const { encrypt } = require("../utils/crypto");
 const chatLogger = require("../utils/chatLogger");
+const quotes = require("../utils/quotes.json");
 
 class ChatController {
   constructor(wsServer) {
@@ -53,6 +54,9 @@ class ChatController {
       case "/help":
         this.handleHelpCommand(ws, clientInfo, clientIP);
         break;
+      case "/morgan":
+        this.handleMorganCommand(ws, clientInfo, clientIP);
+        break;
       default:
         this.wsServer.sendToClient(ws, "system", {
           message: `Comando desconocido: ${cmd}`,
@@ -100,8 +104,39 @@ class ChatController {
   }
 
   handleHelpCommand(ws, clientInfo, clientIP) {
-    const helpMessage = `Comandos: /nick <nombre>, /lista, /salir, /help`;
+    const helpMessage = `Comandos: /nick <nombre>, /lista, /salir, /morgan, /help`;
     this.wsServer.sendToClient(ws, "system", { message: helpMessage });
+  }
+
+  handleMorganCommand(ws, clientInfo, clientIP) {
+    const invokingMessage = "Invocando a Morgan...";
+    const encryptedInvoking = encrypt(invokingMessage);
+    const invokingChatMessage = {
+      username: clientInfo.username,
+      content: encryptedInvoking,
+      timestamp: new Date().toISOString(),
+      encrypted: true,
+    };
+
+    // Enviar mensaje de invocación
+    this.wsServer.sendToClient(ws, "chat_message", invokingChatMessage);
+    this.wsServer.broadcast("chat_message", invokingChatMessage, ws);
+    chatLogger.logMessage(clientInfo.username, invokingMessage, clientIP);
+
+    // Obtener una frase aleatoria de Morgan Freeman
+    const morganQuotes = quotes.morganFreemanQuotes;
+    const randomIndex = Math.floor(Math.random() * morganQuotes.length);
+    const randomQuote = morganQuotes[randomIndex];
+    
+    // Enviar la frase como mensaje del sistema a todos
+    this.wsServer.sendToClient(ws, "system", {
+      message: `"${randomQuote}"`,
+    });
+    this.wsServer.broadcast("system", {
+      message: `"${randomQuote}"`,
+    }, ws);
+
+    chatLogger.logMessage("Morgan Freeman", randomQuote, clientIP);
   }
 }
 
