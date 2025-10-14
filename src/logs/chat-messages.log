@@ -6,3 +6,7 @@
 [2025-10-13 10:21:20] [nicktest] (localhost) -> "probar comando salir"
 [2025-10-13 10:21:22] [nicktest] (localhost) -> COMANDO: /salir
 [2025-10-13 10:21:22] [SISTEMA] (localhost) -> nicktest se desconectó del chat
+[2025-10-14 11:47:25] [SISTEMA] (localhost) -> test se conectó al chat
+[2025-10-14 11:47:29] [test] (localhost) -> "asdsad"
+[2025-10-14 11:47:34] [test] (localhost) -> "asdads"
+[2025-10-14 11:48:16] [test] (localhost) -> "uwu"

@@ -1,5 +1,5 @@
-const WebSocketServer = require("./src/services/WebSocketServer");
-const HTTPServer = require("./src/services/HTTPServer");
+const WebSocketServer = require("./src/servers/WebSocketServer");
+const HTTPServer = require("./src/servers/HTTPServer");
 const logger = require("./src/utils/logger");
 const config = require("./src/config");
 
