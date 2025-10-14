@@ -204,7 +204,8 @@ body {
 .user-info {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
+    width: 100%;
 }
 
 .status-connected {
@@ -226,6 +227,7 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-left: auto;
 }
 
 /* Mensajes */
