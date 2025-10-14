@@ -1,29 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MorganFreeChat</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <div id="auth-screen" class="screen active">
-            
-            <div class="auth-container">
-                <h1>MorganFreeChat</h1>
+      <div id="auth-screen" class="screen active">
+        <div class="auth-container">
+          <h1>MorganFreeChat</h1>
+          <div id="login-form" class="form-container active">
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+              <input
+                type="text"
+                id="login-username"
+                placeholder="Usuario"
+                required
+              />
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Contraseña"
+                required
+              />
+              <button type="submit">Entrar</button>
+            </form>
+            <p>
+              <a href="#" id="show-register">¿No tienes cuenta? Regístrate</a>
+            </p>
+          </div>
 
-                <div id="login-form" class="form-container active">
-                    <h2>Iniciar Sesión</h2>
-                    <form id="loginForm">
-                        <input type="text" id="login-username" placeholder="Usuario" required>
-                        <input type="password" id="login-password" placeholder="Contraseña" required>
-                        <button type="submit">Entrar</button>
-                    </form>
-                    <p><a href="#" id="show-register">¿No tienes cuenta? Regístrate</a></p>
-                </div>
+          <div id="register-form" class="form-container">
+            <h2>Crear Cuenta</h2>
+            <form id="registerForm">
+              <input
+                type="text"
+                id="register-username"
+                placeholder="Usuario"
+                required
+              />
+              <input
+                type="password"
+                id="register-password"
+                placeholder="Contraseña"
+                required
+              />
+              <input
+                type="password"
+                id="register-confirm"
+                placeholder="Confirmar Contraseña"
+                required
+              />
+              <button type="submit">Registrarse</button>
+            </form>
+            <p>
+              <a href="#" id="show-login">¿Ya tienes cuenta? Inicia sesión</a>
+            </p>
+          </div>
 
                 <div id="register-form" class="form-container">
                     <h2>Crear Cuenta</h2>
@@ -43,43 +80,48 @@
             <div class="logo-container">
                 <img src="./images/Morganfreechat1.png" alt="MorganFreeChat Logo" class="logo">
             </div>
+          <div id="auth-error" class="error-message"></div>
         </div>
+      </div>
 
-        <div id="chat-screen" class="screen">
-            <div class="chat-container">
-                <div class="chat-header">
-                    <h2>MorganFreeChat</h2>
-                    <div class="user-info">
-                        <span id="connection-status" class="status-connected">🟢</span>
-                        <span>Usuario: <strong id="username-display"></strong></span>
-                        <button id="logout-btn">Salir</button>
-                    </div>
-                </div>
-
-                <div id="messages-container" class="messages-container">
-                </div>
-
-                <div class="message-input-container">
-                    <form id="message-form">
-                        <input type="text" id="message-input" placeholder="Escribe tu mensaje..." maxlength="500">
-                        <button type="submit" id="send-btn">Enviar</button>
-                    </form>
-                </div>
+      <div id="chat-screen" class="screen">
+        <div class="chat-container">
+          <div class="chat-header">
+            <h2>MorganFreeChat</h2>
+            <div class="user-info">
+              <span id="connection-status" class="status-connected">🟢</span>
+              <span>Usuario: <strong id="username-display"></strong></span>
+              <button id="logout-btn">Salir</button>
             </div>
-        </div>
+          </div>
 
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <h3 id="modal-title">Información</h3>
-                <div id="modal-body"></div>
-                <button id="modal-ok">Aceptar</button>
-            </div>
+          <div id="messages-container" class="messages-container"></div>
+
+          <div class="message-input-container">
+            <form id="message-form">
+              <input
+                type="text"
+                id="message-input"
+                placeholder="Escribe tu mensaje..."
+                maxlength="500"
+              />
+              <button type="submit" id="send-btn">Enviar</button>
+            </form>
+          </div>
         </div>
+      </div>
+
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <h3 id="modal-title">Información</h3>
+          <div id="modal-body"></div>
+          <button id="modal-ok">Aceptar</button>
+        </div>
+      </div>
     </div>
 
     <script src="crypto-client.js"></script>
     <script src="websocket-client.js"></script>
-    <script src="app.js"></script>
-</body>
-
+    <script src="chatApp.js"></script>
+  </body>
 </html>

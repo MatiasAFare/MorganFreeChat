@@ -37,3 +37,6 @@ coverage/
 # Misc
 *.tgz
 .pnpm-debug.log*
+node_modules
+logs
+.env
