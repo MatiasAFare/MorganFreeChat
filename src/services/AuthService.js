@@ -42,6 +42,7 @@ async function registerUser(username, password) {
     const user = await db.createUser(username, hashedPassword);
 
     console.log(`Usuario registrado: ${username}`);
+    console.log(`ID de usuario: ${user.id}`);
 
     return {
       success: true,
