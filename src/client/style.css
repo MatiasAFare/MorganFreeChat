@@ -233,10 +233,8 @@ body {
 /* Mensajes */
 .messages-container {
     background-image: url('./images/MorganfreechatHappy.jpg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: black;
-    flex: 1;
+    background-repeat: round;
+    height: 100%;
     padding: 20px;
     overflow-y: auto;
 }
