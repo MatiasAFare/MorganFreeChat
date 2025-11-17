@@ -1,95 +1,118 @@
+# MorganFreeChat
 
+Aplicación de chat multiusuario en tiempo real con autenticación JWT y cifrado de mensajes.
 
-<div align="center">
-	<img src="server/images/MorganOh.png" alt="MorganFreeChat" width="120"/>
-  
-	# 🗨️ MorganFreeChat
-  
-	<b>Chat multiusuario por consola usando Node.js y TCP</b>
+## Descripción
 
-	<br/>
-  
-	<a href="https://nodejs.org/">
-		<img src="https://img.shields.io/badge/node-%3E%3D14.0.0-green?logo=node.js" alt="Node.js version"/>
-	</a>
-	<a href="./LICENSE">
-		<img src="https://img.shields.io/badge/license-ISC-blue.svg" alt="License: ISC"/>
-	</a>
-</div>
+MorganFreeChat es una aplicación de chat que permite comunicación en tiempo real entre múltiples usuarios. Implementa WebSockets para comunicación instantánea, autenticación segura mediante JWT y cifrado AES para los mensajes.
 
----
+## Tecnologías Utilizadas
 
-## 📚 Consignas
+- **Backend**: Node.js, Express.js, WebSockets
+- **Frontend**: HTML5, CSS3, JavaScript vanilla
+- **Base de datos**: SQLite3
+- **Autenticación**: JSON Web Tokens (JWT)
+- **Cifrado**: AES-256 para mensajes
+- **Logging**: Winston para logs del sistema
 
-Cada estudiante debe entregar:
-- Código fuente completo, con la implementación realizada en clase.
-- Documentación del proyecto, incluyendo:
-  - Explicación del funcionamiento del sistema.
-  - Instrucciones para ejecutar el servidor y conectarse como cliente.
-  - Ejemplos de uso y pruebas realizadas.
+## Instalación
 
----
+### Requisitos previos
+- Node.js 18 o superior
+- npm 9 o superior
 
-## 🚀 ¿Cómo funciona?
-
-MorganFreeChat es un chat multiusuario por consola, donde los clientes se conectan a un servidor TCP y pueden:
-- Enviar mensajes a todos los usuarios conectados
-- Cambiar su nick (`/nick`)
-- Ver la lista de usuarios (`/lista`)
-- Salir del chat (`/salir`)
-Todos los mensajes y eventos quedan registrados en logs.
-
----
-
-## ⚡ Instalación y ejecución
-
-1. Clona el repositorio:
-	```bash
-	git clone https://github.com/MatiasAFare/MorganFreeChat.git
-	cd MorganFreeChat
-	```
-2. Instala Node.js (v14+ recomendado).
-3. Instala dependencias (si las hubiera):
-	```bash
-	npm install
-	```
-4. Inicia el servidor:
-	```bash
-	npm start
-	```
-5. En otra terminal, ejecuta el cliente:
-	```bash
-	npm run client
-	```
-
----
-
-## 💻 Ejemplo de uso
-
-```
-Elige tu nick: Carlos
-Conectado al servidor como Carlos
-Carlos: Hola a todos!
+### Instalación
+```bash
+git clone https://github.com/MatiasAFare/MorganFreeChat.git
+cd MorganFreeChat
+npm install
 ```
 
-Comandos disponibles:
-- `/nick NUEVO_NICK` — Cambia tu nick
-- `/lista` — Muestra los usuarios conectados
-- `/salir` — Salir del chat
+## Configuración
 
----
+El archivo `.env` ya está incluido con la configuración básica. Para producción, modifica las siguientes variables:
 
-## 📝 Logs y pruebas
-
-Todos los mensajes y eventos quedan registrados en `logs/chat.log` y `logs/chat.md`.
-
-Ejemplo de log:
-```
-[2025-10-01T15:46:58.951Z] Carlos se ha unido al chat
+```bash
+JWT_SECRET=tu_clave_secreta_jwt
+ENCRYPTION_KEY=tu_clave_de_cifrado_aes
 ```
 
----
+## Uso
 
-## 📄 Autor
+### Iniciar el servidor
+```bash
+npm start
+```
 
-Fagove — 2025
+### Acceso
+- **Cliente web**: http://localhost:3000
+- **WebSocket server**: ws://localhost:8080
+
+### Registro y autenticación
+1. Abrir http://localhost:3000 en el navegador
+2. Crear una cuenta nueva o iniciar sesión
+3. Comenzar a chatear con otros usuarios conectados
+
+## Arquitectura
+
+La aplicación sigue una arquitectura MVC con separación clara de responsabilidades:
+
+### Componentes principales
+- **src/services/**: Servidores HTTP y WebSocket
+- **src/controllers/**: Lógica de negocio (chat, autenticación)
+- **src/models/**: Modelos de datos (base de datos SQLite)
+- **src/client/**: Cliente web (HTML, CSS, JavaScript)
+- **src/utils/**: Utilidades (logging, cifrado)
+- **src/config/**: Configuración centralizada
+
+## Funcionalidades
+
+### Autenticación
+- Registro e inicio de sesión de usuarios
+- Autenticación con JWT tokens
+- Cifrado de contraseñas con bcrypt
+- Gestión de sesiones
+
+### Chat en tiempo real
+- Comunicación instantánea via WebSockets
+- Mensajes cifrados con AES-256
+- Sistema de comandos (/nick, /lista, /help, /salir)
+- Reconexión automática
+- Desconexión al cerrar ventana/pestaña
+
+### Logging
+- Registro completo de actividad del chat en `src/logs/chat-messages.log`
+  - Mensajes de usuarios
+  - Comandos ejecutados
+  - Eventos de conexión/desconexión
+- Logs del sistema en consola (Winston)
+
+## API
+
+### Endpoints REST
+- `POST /api/register` - Registrar nuevo usuario
+- `POST /api/login` - Iniciar sesión
+
+### Comandos de chat
+- `/nick <nombre>` - Cambiar nombre de usuario
+- `/lista` - Ver usuarios conectados  
+- `/help` - Mostrar ayuda
+- `/salir` - Salir del chat
+
+## Estructura del proyecto
+
+```
+src/
+├── client/          # Cliente web (HTML, CSS, JS)
+├── config/          # Configuración centralizada
+├── controllers/     # Controladores (chat, autenticación)
+├── data/           # Base de datos SQLite
+├── logs/           # Archivos de log
+├── models/         # Modelos de datos
+├── services/       # Servicios (HTTP, WebSocket)
+└── utils/          # Utilidades (logging, cifrado)
+```
+
+## Licencia
+
+Este proyecto está bajo la Licencia ISC. 
