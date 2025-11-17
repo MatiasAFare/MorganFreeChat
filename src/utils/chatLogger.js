@@ -1,9 +1,12 @@
 const fs = require("fs");
 const path = require("path");
+const config = require("../config");
 
 class ChatLogger {
   constructor() {
-    this.logPath = path.join(__dirname, "../logs/chat-messages.log");
+    const logDir = config.logging.dir;
+    const fileName = config.logging.fileChat;
+    this.logPath = path.join(__dirname, "..", logDir, fileName);
     this.ensureLogFileExists();
   }
 

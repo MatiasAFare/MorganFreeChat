@@ -21,16 +21,28 @@ class ChatController {
 
   async handleTextMessage(ws, content, clientInfo, clientIP) {
     const encryptedContent = encrypt(content.trim());
-    const chatMessage = {
+    
+    // Mensaje para el remitente: SIN cifrar (él ya lo sabe)
+    const messageForSender = {
+      username: clientInfo.username,
+      content: content.trim(),
+      timestamp: new Date().toISOString(),
+      encrypted: false,
+    };
+    
+    // Mensaje para otros: CIFRADO
+    const messageForOthers = {
       username: clientInfo.username,
       content: encryptedContent,
       timestamp: new Date().toISOString(),
       encrypted: true,
     };
 
-    // Enviar a remitente y broadcast a otros
-    this.wsServer.sendToClient(ws, "chat_message", chatMessage);
-    this.wsServer.broadcast("chat_message", chatMessage, ws);
+    // Enviar al remitente sin cifrado
+    this.wsServer.sendToClient(ws, "chat_message", messageForSender);
+    
+    // Enviar a otros cifrado
+    this.wsServer.broadcast("chat_message", messageForOthers, ws);
 
     chatLogger.logMessage(clientInfo.username, content.trim(), clientIP);
   }

@@ -72,8 +72,10 @@ class ChatApp {
           "color: #f59e0b; font-weight: bold"
         )
         console.log("   Usuario:", data.username)
-        console.log("   Encrypted:", data.content.encrypted)
-        console.log("   IV:", data.content.iv)
+        console.log("   data.content type:", typeof data.content)
+        console.log("   data.content:", data.content)
+        console.log("   data.content.encrypted:", data.content?.encrypted)
+        console.log("   data.content.iv:", data.content?.iv)
 
         try {
           content = await clientCrypto.decrypt(data.content)

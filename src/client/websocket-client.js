@@ -17,7 +17,8 @@ class WebSocketClient {
   getWebSocketUrl() {
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
     const host = window.location.hostname;
-    const port = 8080;
+    // Usar puerto desde window.__WS_PORT__ inyectado por el servidor
+    const port = window.__WS_PORT__ || 8080;
     return `${protocol}//${host}:${port}`;
   }
 

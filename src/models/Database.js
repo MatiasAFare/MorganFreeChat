@@ -1,10 +1,11 @@
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
+const config = require("../config");
 
 class Database {
   constructor() {
-    const dataDir = path.join(__dirname, "../data");
-    const dbPath = path.join(dataDir, "users.db");
+    const dbPath = config.database.path;
+    const dataDir = path.dirname(dbPath);
 
     const fs = require("fs");
     if (!fs.existsSync(dataDir)) {

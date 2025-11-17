@@ -1,12 +1,11 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Database = require("../models/Database");
-require("dotenv").config();
+const config = require("../config");
 
-const JWT_SECRET =
-  process.env.JWT_SECRET || "morgan_free_chat_super_secret_key_2025";
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "24h";
-const BCRYPT_ROUNDS = parseInt(process.env.BCRYPT_ROUNDS) || 12;
+const JWT_SECRET = config.jwt.secret;
+const JWT_EXPIRES_IN = config.jwt.expiresIn;
+const BCRYPT_ROUNDS = config.database.bcryptRounds;
 
 const db = new Database();
 

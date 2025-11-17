@@ -1,20 +1,56 @@
-// crypto-client.js (navegador) - PoC: deriva una clave de la passphrase y descifra AES-CBC
+// crypto-client.js (navegador) - Descifra AES-CBC usando clave derivada (base64)
 class ClientCrypto {
   constructor() {
-    this.passphrase = window.__ENCRYPTION_PASSPHRASE__ || "MorganFreeChatAESKey2025Secret!";
+    this.keyArrayBuf = null;
     this.keyPromise = null;
   }
 
-  _encode(str) {
-    return new TextEncoder().encode(str);
+  _ensureKeyLoaded() {
+    // Validar que la clave esté inyectada por el servidor (lazy validation)
+    if (!window.__ENCRYPTION_KEY_B64__) {
+      throw new Error(
+        "ENCRYPTION_KEY no está configurada. " +
+        "El servidor debe inyectar window.__ENCRYPTION_KEY_B64__"
+      );
+    }
+    
+    // Convertir la clave de base64 a Uint8Array solo una vez
+    if (!this.keyArrayBuf) {
+      this.keyArrayBuf = this._base64ToArrayBuffer(window.__ENCRYPTION_KEY_B64__);
+      console.log(
+        "%c🔑 Clave recibida (B64):",
+        "color: #8b5cf6; font-weight: bold",
+        window.__ENCRYPTION_KEY_B64__
+      );
+      console.log(
+        "%c   → Convertida a buffer de",
+        "color: #8b5cf6",
+        new Uint8Array(this.keyArrayBuf).length,
+        "bytes"
+      );
+    }
+  }
+
+  _base64ToArrayBuffer(base64) {
+    const binaryString = atob(base64);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes.buffer;
   }
 
   async _getKey() {
     if (this.keyPromise) return this.keyPromise;
+    this._ensureKeyLoaded();
     this.keyPromise = (async () => {
-      const passBuf = this._encode(this.passphrase);
-      const hash = await crypto.subtle.digest("SHA-256", passBuf);
-      return crypto.subtle.importKey("raw", hash, { name: "AES-CBC" }, false, ["decrypt"]);
+      return crypto.subtle.importKey(
+        "raw",
+        this.keyArrayBuf,
+        { name: "AES-CBC" },
+        false,
+        ["decrypt"]
+      );
     })();
     return this.keyPromise;
   }
@@ -37,11 +73,30 @@ class ClientCrypto {
       const ivBuf = this._hexToBuffer(encryptedData.iv);
       const cipherBuf = this._hexToBuffer(encryptedData.encrypted);
 
+      console.log(
+        "%c🔐 Descifrando:",
+        "color: #f59e0b; font-weight: bold",
+        "IV size:",
+        new Uint8Array(ivBuf).length,
+        "bytes, Cipher size:",
+        new Uint8Array(cipherBuf).length,
+        "bytes"
+      );
+
       const plainBuf = await crypto.subtle.decrypt({ name: "AES-CBC", iv: ivBuf }, key, cipherBuf);
       const text = new TextDecoder().decode(plainBuf);
+      console.log(
+        "%c✅ Descifrado OK:",
+        "color: #10b981; font-weight: bold",
+        text
+      );
       return text;
     } catch (error) {
-      console.error("Error decrypting message:", error);
+      console.error(
+        "%c❌ Error al descifrar:",
+        "color: #ef4444; font-weight: bold",
+        error
+      );
       return "[Mensaje cifrado]";
     }
   }
