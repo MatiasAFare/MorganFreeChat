@@ -2,7 +2,7 @@ const winston = require("winston");
 const path = require("path");
 const config = require("../config");
 
-const logDir = config.logging.dir;
+const logDir = path.join(__dirname, "../../", config.logging.dir);
 const logLevel = config.logging.level;
 
 const logger = winston.createLogger({

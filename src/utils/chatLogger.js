@@ -4,9 +4,9 @@ const config = require("../config");
 
 class ChatLogger {
   constructor() {
-    const logDir = config.logging.dir;
+    const logDir = path.join(__dirname, "../../", config.logging.dir);
     const fileName = config.logging.fileChat;
-    this.logPath = path.join(__dirname, "..", logDir, fileName);
+    this.logPath = path.join(logDir, fileName);
     this.ensureLogFileExists();
   }
 
